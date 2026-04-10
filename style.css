@@ -1,0 +1,208 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    overflow-x: hidden;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Tiêu đề */
+h1 {
+    font-size: clamp(1.7rem, 5vw, 2.35rem);
+    margin-bottom: 8px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, 
+        #ff00cc, #00ffff, #ffff00, 
+        #00ff88, #ff00cc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow 5s linear infinite;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes rainbow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Thông báo đúng/sai - có hiệu ứng chớp chớp */
+#feedback {
+    font-size: clamp(1.55rem, 4.4vw, 2.05rem);
+    margin: 6px 0 18px 0;
+    min-height: 50px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: flash 1.2s infinite;   /* Hiệu ứng chớp */
+}
+
+/* Hiệu ứng chớp chớp */
+@keyframes flash {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.3; }
+}
+
+/* Khi đúng → màu xanh + chớp nhẹ nhàng hơn */
+#feedback.correct {
+    color: #00ff88;
+    animation: flash-correct 0.8s infinite;
+}
+
+@keyframes flash-correct {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+}
+
+/* Khi sai → màu đỏ + chớp nhanh hơn */
+#feedback.wrong {
+    color: #ff3366;
+    animation: flash-wrong 1s infinite;
+}
+
+@keyframes flash-wrong {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+}
+
+/* Khung ảnh note */
+#note-container {
+    margin: 10px auto;
+    padding: 12px;
+    background: #1e1e2e;
+    border-radius: 18px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+    max-width: 360px;
+}
+
+#note-image {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* 4 button đáp án */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0 16px 0;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.option-btn {
+    height: 78px;
+    font-size: clamp(1.55rem, 4.3vw, 1.95rem);
+    font-weight: 800;
+    color: #000000;
+    background: url('Button.png') center/cover no-repeat;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+.option-btn:hover {
+    transform: scale(1.05);
+}
+
+.option-btn:active {
+    transform: scale(0.95);
+}
+
+/* Button Lượt Mới */
+.btn-new {
+    height: 68px;
+    width: 100%;
+    max-width: 255px;
+    margin: 6px auto 0;
+    font-size: clamp(1.4rem, 3.8vw, 1.7rem);
+    font-weight: 800;
+    color: #000000;
+    background: url('Button.png') center/cover no-repeat;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+.btn-new:hover {
+    transform: scale(1.06);
+}
+
+.btn-new:active {
+    transform: scale(0.95);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    body { padding: 8px; }
+    
+    #note-container { 
+        padding: 11px; 
+        margin: 8px auto; 
+    }
+    #note-image { max-width: 290px; }
+    
+    .options-grid {
+        gap: 11px;
+        margin: 18px 0 14px 0;
+    }
+    .option-btn { height: 74px; }
+}
+
+/* Hiệu ứng chớp cho button đúng */
+.option-btn.flash-correct {
+    animation: button-flash 1.2s infinite;
+}
+
+@keyframes button-flash {
+    0%, 100% { 
+        opacity: 1; 
+        box-shadow: 0 0 0 8px rgba(0, 255, 136, 0.6);
+    }
+    50% { 
+        opacity: 0.7; 
+        box-shadow: 0 0 0 15px rgba(0, 255, 136, 0.2);
+    }
+}
+
+@media (max-width: 380px) {
+    .option-btn { 
+        font-size: 1.5rem; 
+        height: 72px; 
+    }
+    .btn-new { height: 66px; }
+}
